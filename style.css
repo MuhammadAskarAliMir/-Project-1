@@ -1,0 +1,376 @@
+/* Custom Architecture Variables matching the strict 2025 Palette rules */
+:root {
+    --color-mocha: #A5856F;       /* Mocha Mousse - Stability & Grounding */
+    --color-ethereal: #A0D4E0;    /* Ethereal Blue - Trust */
+    --color-moonlit: #F2F0EA;     /* Moonlit Grey - Refinement Surface Background */
+    --color-charcoal: #2E2C2A;    /* Grounded Deep Tone */
+    --color-pure-white: #FFFFFF;
+    
+    /* Notification Accents for the Application Domain */
+    --color-alert-bg: #FBEBE6;
+    --color-alert-text: #C85A32;
+    --color-stable-bg: #E6F4EA;
+    --color-stable-text: #137333;
+
+    /* Typography Hierarchy paired fluidly via clamp() metrics */
+    --font-heading: 'Inter', system-ui, sans-serif;
+    --font-body: 'Roboto', system-ui, sans-serif;
+    
+    --fs-h1: clamp(1.85rem, 4.5vw + 1rem, 3.25rem);
+    --fs-h2: clamp(1.4rem, 2.5vw + 1rem, 2rem);
+    --fs-h3: clamp(1.15rem, 1.5vw + 1rem, 1.5rem);
+    --fs-body: clamp(0.95rem, 0.4vw + 0.8rem, 1.05rem);
+    
+    --transition-standard: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* System Reset Constraints */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    background-color: var(--color-moonlit);
+    color: var(--color-charcoal);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Macro Element Structure: Interactive App Header via Flexbox micro layouts */
+.app-header {
+    background-color: var(--color-pure-white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+}
+
+.header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-branding {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-icon {
+    font-size: 1.5rem;
+}
+
+.brand-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--color-charcoal);
+    font-weight: 500;
+    transition: var(--transition-standard);
+    padding: 0.5rem 0;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--color-mocha);
+}
+
+/* Micro-Component Structure: Smartphone Hamburger Interaction Node */
+.menu-trigger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-charcoal);
+    position: relative;
+    transition: var(--transition-standard);
+}
+
+.hamburger-bar::before, .hamburger-bar::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-charcoal);
+    transition: var(--transition-standard);
+}
+
+.hamburger-bar::before { top: -6px; }
+.hamburger-bar::after { bottom: -6px; }
+
+/* Interactive Dropdown State Transformations */
+.menu-trigger[aria-expanded="true"] .hamburger-bar {
+    background-color: transparent;
+}
+.menu-trigger[aria-expanded="true"] .hamburger-bar::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+.menu-trigger[aria-expanded="true"] .hamburger-bar::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+/* Fluid Layout Application Hero Banner */
+.hero-display {
+    background: linear-gradient(145deg, rgba(160, 212, 224, 0.35) 0%, rgba(242, 240, 234, 0.7) 100%);
+    padding: clamp(2.5rem, 6vw, 5rem) 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.02);
+}
+
+.hero-inner {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.hero-display h1 {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h1);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-display p {
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+/* Macro Layout System Setup: Absolute Mobile-First Standard Fallback Layout */
+.dashboard-blueprint {
+    max-width: 1440px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    flex-grow: 1;
+}
+
+/* Interior Component Blocks Structuring */
+.control-sidebar, .data-card {
+    background-color: var(--color-pure-white);
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(46, 44, 42, 0.03);
+    border: 1px solid rgba(46, 44, 42, 0.04);
+}
+
+.control-sidebar h3 {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    margin-bottom: 1.25rem;
+}
+
+.matrix-data {
+    list-style: none;
+}
+
+.matrix-data li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.matrix-data li:last-child {
+    border-bottom: none;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-stable-text);
+    border-radius: 50%;
+}
+
+/* Micro Elements: Data Card Content Layout Flow */
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.data-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.card-badge {
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.badge-alert { background-color: var(--color-alert-bg); color: var(--color-alert-text); }
+.badge-stable { background-color: var(--color-stable-bg); color: var(--color-stable-text); }
+.badge-transit { background-color: #EBF5F8; color: #1A73E8; }
+
+.card-timestamp {
+    color: #75706B;
+}
+
+.data-card h2 {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h2);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.data-card p {
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+    flex-grow: 1;
+}
+
+/* Component Buttons Framework */
+.action-btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-standard);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-mocha);
+    color: var(--color-pure-white);
+}
+
+.btn-primary:hover {
+    filter: brightness(0.92);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-ethereal);
+    color: var(--color-charcoal);
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-ethereal);
+}
+
+/* System Terminal Metadata Footer Section */
+.app-footer {
+    background-color: var(--color-charcoal);
+    color: var(--color-moonlit);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-inner p {
+    opacity: 0.8;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.system-hash {
+    font-family: monospace;
+    font-size: 0.8rem;
+    opacity: 0.4 !important;
+}
+
+/* Tactical Macro-Architecture Breakpoint Adjustments */
+
+/* Intermediate Breakpoint Rule: Tablet Adaptations */
+@media (min-width: 768px) {
+    .main-content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .btn-secondary {
+        width: auto;
+    }
+}
+
+/* Advanced Structural Breakpoint: High Definition Screens Layout Adjustments */
+@media (min-width: 1024px) {
+    .dashboard-blueprint {
+        grid-template-columns: 320px 1fr;
+    }
+    
+    .main-content-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile Screen View Navigation Collapse Rules */
+@media (max-width: 767px) {
+    .menu-trigger {
+        display: block;
+    }
+    
+    .app-navigation {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-pure-white);
+        padding: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .app-navigation.is-active {
+        display: block;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+    }
+}
